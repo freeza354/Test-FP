@@ -6,21 +6,29 @@ public class PlayerScript : MonoBehaviour {
 
     public float PlayerMoveSpeed;
 
+	private Rigidbody rb;
+
 	// Use this for initialization
 	void Start () {
-		
+
+		rb = GetComponent<Rigidbody>();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        Plane playerPlane = new Plane(Vector3.up, transform.position);
-        Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
-        float hitDistance = 0f;
+		var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 150f;
+		var z = Input.GetAxis ("Vertical") * Time.deltaTime * 3f;
 
-        if(true){
+		transform.Rotate (0, x, 0);
+		transform.Translate (0, 0, z);
 
-        }
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			
+			rb.AddForce (transform.forward * PlayerMoveSpeed);		
+		
+		}
 
 	}
 }
